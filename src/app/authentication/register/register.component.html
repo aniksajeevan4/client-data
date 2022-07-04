@@ -1,0 +1,36 @@
+<nav class="navbar bg-primary">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1" style="text-align:center;"></span>
+    </div>
+</nav>
+
+<div class="container">
+    <form class="" [formGroup]="register" (ngSubmit)="onSubmit()">
+        <h3 style="text-align:center; padding: 10px;">Register</h3>
+        <div class="col p-4">
+            <label for="inputEmail4" class="form-label">User Name</label>
+            <input type="text" class="form-control" formControlName="name" id="" >
+            <span class="text-danger" *ngIf="submitted && register.controls.name.errors ">please enter id</span>
+        </div>
+
+        <div class="col p-4">
+            <label for="inputEmail4" class="form-label">Phone Number</label>
+            <input type="text" class="form-control" formControlName="number" id="" >
+            <span class="text-danger" *ngIf="submitted && register.controls.number.errors ">please enter id</span>
+        </div> <div class="col p-4">
+            <label for="inputEmail4" class="form-label">User Id</label>
+            <input type="text" class="form-control" formControlName="id" id="" >
+            <span class="text-danger" *ngIf="submitted && register.controls.id.errors ">please enter id</span>
+        </div>
+
+        <div class="col p-4">
+            <label for="inputEmail4" class="form-label">Password</label>
+            <input type="password" formControlName="password" class="form-control" id="" >
+            <span class="text-danger" *ngIf="submitted && register.controls.password.errors ">please enter password</span>
+        </div>
+        <div class="col " style="margin-left: 100px; margin-top: 30px;">
+            <button type="submit" class="btn btn-warning" (click)="saveData()">Register</button>
+            <input type="button" value="Login"  routerLink=""  class="btn btn-primary" style="margin-left: 10px;">
+        </div>
+    </form>
+</div>

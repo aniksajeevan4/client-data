@@ -1,0 +1,234 @@
+<!-- navbar -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item active" style="margin-left: 10px;">
+            <a class="nav-link" routerLink="/list">Home</a>
+            </li>
+            <li class="nav-item active">
+            <a class="nav-link" routerLink="/add">Add</a>
+            </li>
+            </ul>
+ </div>
+ <h4 style="margin-right: 400px;" >{{username | uppercase}}</h4>
+ <div>
+            <button type="button" (click)=" clickShow()" class="btn btn-outline-dark my-2 my-sm-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Data</button>
+</div> 
+<button class="btn btn-outline-dark my-2 my-sm-0" (click)="logout()" type="submit">Logout</button>
+</nav>
+
+<!-- search -->
+<div class="active-pink-3 active-pink-4 mb-4">
+            <input class="form-control" type="text" name="firstname" [(ngModel)]="searchValue" placeholder="Enter Name,District,Designation to Search" aria-label="Search">
+</div>
+
+<!-- table -->
+
+<div class="div">
+      <table class="table">
+      <thead>
+      <tr>
+            <th scope="col">ID NUMBER</th>
+            <th scope="col">NAME</th>
+            <th scope="col">AGE</th>
+            <th scope="col">ADDRESS</th>
+            <th scope="col">District</th>
+            <th scope="col">DESIGNATION</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of collection | searchFilter:searchValue ; index as i " style="font-family:'Times New Roman', Times, serif">
+            <th scope="row">{{i+1}}</th>
+            <th scope="row">{{data.firstname}}</th>
+            <th scope="row">{{data.age}}</th>
+            <th scope="row">{{data.caddress}}</th>
+            <th scope="row">{{data.cdistrict}}</th>
+            <th scope="row">{{data.occupation}}</th>
+            <input type="button" (click)="edit(data)" value="Edit" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="button-10">
+            <input type="button" (click)="delete(data)" value="Delete" class="button-1">
+      </tr>
+      </tbody>
+      </table>
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="width: 100%;">
+  <div class="modal-dialog">
+  <div class="modal-content">
+  <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Add Data</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+
+    <!-- Reactive Form -->
+
+  <div class="modal-body">
+  <form class="" [formGroup]="Addform" (ngSubmit)="onSubmit()">
+  <div class="">
+          <h4>Personal Details</h4>
+  <div>
+          <label for="inputEmail4" class="form-label">Title</label>
+          <select id="" formControlName="title" style="margin-left: 50px;">
+          <option value="M">Mr</option>
+          <option value="M">Mrs</option>
+          </select>
+          <span class="text-danger" *ngIf="submitted && Addform.controls.title.errors ">please enter title</span>
+  </div>
+  <div class="">
+          <label for="inputEmail4" class="form-label">Firstname</label>
+          <input type="email" formControlName="firstname" class="" id=""  placeholder=" firstname" style="margin-left: 40px;">
+          <span class="text-danger" *ngIf="submitted && Addform.controls.firstname.errors ">please enter firstname</span>
+  </div>
+  <div>
+          <label for="inputEmail4" class="form-label">Middlename</label>
+          <input type="email" formControlName="middlename" class="" id=""  placeholder=" middlename" style="margin-left: 20px;">
+          <span class="text-danger" *ngIf="submitted && Addform.controls.middlename.errors ">please enter middlename</span>
+  </div>
+  <div>
+          <label for="inputEmail4" class="form-label">Lastname</label>
+          <input type="email" formControlName="lastname" class="" id=""  placeholder=" lastname" style="margin-left: 20px;">
+          <span class="text-danger" *ngIf="submitted && Addform.controls.lastname.errors ">please enter lastname</span>
+ </div>
+
+ <div class="">
+          <label for="inputEmail4" class="form-label">Age</label>
+          <input type="number" formControlName="age" class="" id=""  placeholder=" Enter age" style="margin-left: 50px;">
+          <small class="text-danger" *ngIf="submitted && Addform.controls.age.errors ">please enter age</small>
+   </div>
+  </div>
+
+  <div class="parent">
+  <div class="child">
+      <h3>Communication address</h3>
+  <div class="">
+          <label for="inputEmail4" class="form-label">Address</label>
+          <input type="text" formControlName="caddress" class="" id="" style="margin-left: 30px;">
+          <small class="text-danger" *ngIf="submitted && Addform.controls.caddress.errors ">please enter address</small>
+  </div>
+  <div class="">
+          <label for="inputEmail4" class="form-label">City</label>
+          <input type="text" formControlName="ccity" class="" id=""  style="margin-left: 58px;">
+          <small class="text-danger" *ngIf="submitted && Addform.controls.ccity.errors ">please enter city</small>
+  </div>
+  <div class="">
+          <label for="inputEmail4" class="form-label">District</label>
+          <input type="text" formControlName="cdistrict" class="" id=""  style="margin-left: 35px;">
+          <span class="text-danger" *ngIf="submitted && Addform.controls.cdistrict.errors ">please enter district</span>
+  </div>
+  <div class="">
+          <label for="inputEmail4" class="form-label">State</label>
+          <input type="text" formControlName="cstate" class="" id=""  style="margin-left:50px;">
+          <small class="text-danger" *ngIf="submitted && Addform.controls.cstate.errors ">please enter state</small>
+  </div>
+  <div class="">
+          <label for="inputEmail4" class="form-label">Country</label>
+          <input type="text" formControlName="ccountry" class="" id=""  style="margin-left: 30px;">
+          <small class="text-danger" *ngIf="submitted && Addform.controls.ccountry.errors ">please enter country</small>
+  </div>
+  <div class="">
+          <label for="inputEmail4" class="form-label">Zipcode</label>
+          <input type="text" formControlName="cpin" class="" id=""  style="margin-left: 30px;">
+          <small class="text-danger" *ngIf="submitted && Addform.controls.cpin.errors ">please enter Zipcode</small>
+  </div> <br>
+  </div>
+  <div class="form-group">
+           <label>Is Permanent Address is same</label>
+           <input type="checkbox" value="" class="" (change)="checkValue($event)">
+  </div>
+  <div class="child">
+          <h3>Permanent address</h3>
+  <div class="">
+          <label for="inputEmail4" class="form-label">Address</label>
+          <input type="text" formControlName="paddress" class="" id=""  style="margin-left: 30px;">
+          <small class="text-danger" *ngIf="submitted && Addform.controls.paddress.errors ">please enter address</small>
+  </div>
+  <div class="">
+          <label for="inputEmail4" class="form-label">City</label>
+          <input type="text" formControlName="pcity" class="" id=""  style="margin-left: 58px;">
+          <small class="text-danger" *ngIf="submitted && Addform.controls.pcity.errors ">please enter city</small>
+  </div>
+  <div class="">
+          <label for="inputEmail4" class="form-label">District</label>
+          <input type="text" formControlName="pdistrict" class="" id=""  style="margin-left: 35px;">
+          <small class="text-danger" *ngIf="submitted && Addform.controls.pdistrict.errors ">please enter district</small>
+  </div>
+  <div class="">
+          <label for="inputEmail4" class="form-label">State</label>
+          <input type="text" formControlName="pstate" class="" id=""   style="margin-left: 50px;">
+          <small class="text-danger" *ngIf="submitted && Addform.controls.pstate.errors ">please enter state</small>
+  </div>
+  <div class="">
+          <label for="inputEmail4" class="form-label">Country</label>
+          <input type="text" formControlName="pcountry" class="" id=""  style="margin-left: 30px;">
+          <small class="text-danger" *ngIf="submitted && Addform.controls.pcountry.errors ">please enter country</small>
+  </div>
+  <div class="">
+          <label for="inputEmail4" class="form-label">Zipcode</label>
+          <input type="text" formControlName="ppin" class="" id=""  style="margin-left: 30px;">
+          <small class="text-danger" *ngIf="submitted && Addform.controls.ppin.errors ">please enter Zipcode</small>
+  </div>
+  </div>
+  </div>
+
+
+  <div class="">
+          <h3>occupation details</h3>
+  <div class="">
+          <label for="inputEmail4" class="form-label">Occupation</label>
+          <select name="" id="" formControlName="occupation"  style="margin-left: 50px;">
+          <option value="developer">developer</option>
+          <option value="tester">tester</option>
+          <option value="Teacher">Teacher</option>
+          </select>
+          <small class="text-danger" *ngIf="submitted && Addform.controls.occupation.errors ">please enter occupation</small>
+  </div>
+  <div class="">
+          <label for="inputEmail4" class="form-label">Experience</label>
+          <input type="text" formControlName="experience" id="" style="margin-left: 55px;">
+          <small class="text-danger" *ngIf="submitted && Addform.controls.experience.errors ">please enter experience</small>
+  </div>
+  </div>
+
+  <div class="">
+          <h3>ID and Address Details</h3>
+  <div class="">
+           <label for="inputEmail4" class="form-label">ID proof</label>
+           <select name="" id="" formControlName="idproof"  style="margin-left: 70px;">
+           <option value="Adhar">adhar card</option>
+           <option value="Pan">pan card</option>
+           <option value="Licence">licence</option>
+           </select>
+           <small class="text-danger" *ngIf="submitted && Addform.controls.idproof.errors ">please enter idproof</small>
+        </div>
+  <div>
+          <label for="inputEmail4" class="form-label">Id number</label>
+          <input type="text" formControlName="idnumber"  placeholder="id number"  style="margin-left: 30px;">
+          <small class="text-danger" *ngIf="submitted && Addform.controls.idnumber.errors ">please enter idnumber</small>
+  </div>
+  </div>
+
+  <div class="">
+          <label for="inputEmail4" class="form-label">Adress proof</label>
+          <select formControlName="addrerssproof"  style="margin-left: 40px;">
+          <option value="Adhar">adhar card</option>
+          <option value="Pan">pan card</option>
+          <option value="Licence">licence</option>
+          </select>
+          <small class="text-danger" *ngIf="submitted && Addform.controls.addrerssproof.errors ">please enter addressproof</small>
+  </div>
+  <div>
+          <label for="inputEmail4" class="form-label">Id number</label>
+          <input type="text" formControlName="details" placeholder="id number" style="margin-left: 28px;">
+          <small class="text-danger" *ngIf="submitted && Addform.controls.details.errors ">please enter details</small>
+  </div>
+   <div class="modal-footer">
+          <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
+          <button type="submit" *ngIf="showAdd" class="btn btn-primary" (click)="add()">Save</button>
+          <button type="submit" *ngIf="showEdit" class="btn btn-primary" (click)="update()">update</button>
+  </div>
+  </form>
+  </div>
+  </div>
+  </div>
+  </div>
+</div>
